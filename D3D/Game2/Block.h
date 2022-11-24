@@ -2,7 +2,7 @@
 class Block : public Scene
 {
 private:
-	GameObject* voxel;
+	Actor* voxel;
 	bool check[6];
 
 public:
