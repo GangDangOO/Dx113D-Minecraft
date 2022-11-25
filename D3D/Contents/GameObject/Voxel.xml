@@ -1,4 +1,4 @@
-<Root Name="voxel.obj" Visible="true" ObType="1" BoneIndex="0">
+<Root Name="Up" Visible="true" ObType="1" BoneIndex="0">
     <Skeleton File="voxel/voxel.skel" BoneIndexCount="3"/>
     <Shader File="4.cube.hlsl"/>
     <Transform>

@@ -1,23 +1,23 @@
 #pragma once
-class Block : public Scene
+
+enum class _BlockType
+{
+	GRASS,
+	DIRT
+};
+
+class Block
 {
 private:
-	Actor* voxel;
-	bool check[6];
 
 public:
-	struct _BlockType
-	{
-
-	};
-	Block(int type);
+	Actor* voxel;
+	bool	isExists;
+	Block(_BlockType type);
 	~Block();
-	virtual void Init() override;
-	virtual void Release() override;
-	virtual void Update() override;
-	virtual void LateUpdate() override;
-	virtual void PreRender() override;
-	virtual void Render() override;
-	virtual void ResizeScreen() override;
+	void	RenderHierarchy();
+	void	Release();
+	void	Update();
+	void	Render();
 };
 

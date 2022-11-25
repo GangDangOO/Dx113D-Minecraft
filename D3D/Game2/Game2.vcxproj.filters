@@ -12,6 +12,9 @@
     <ClInclude Include="Block.h">
       <Filter>GameObject</Filter>
     </ClInclude>
+    <ClInclude Include="Chunk.h">
+      <Filter>System</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
@@ -24,6 +27,9 @@
     <ClCompile Include="Block.cpp">
       <Filter>GameObject</Filter>
     </ClCompile>
+    <ClCompile Include="Chunk.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Scene">
@@ -31,6 +37,9 @@
     </Filter>
     <Filter Include="GameObject">
       <UniqueIdentifier>{b626eecd-f76c-49d7-8a29-a4515a4fda19}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System">
+      <UniqueIdentifier>{723def94-cf3b-4f4b-9923-e2bc14951610}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

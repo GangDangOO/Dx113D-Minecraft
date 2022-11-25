@@ -1,11 +1,22 @@
 #include "stdafx.h"
 
-Block::Block(int type)
+Block::Block(_BlockType type)
 {
-	string name = "voxel";
-	voxel = Actor::Create(name);
-
-	voxel->LoadFile("Voxel.xml");
+	voxel = Actor::Create();
+	switch (type)
+	{
+	case _BlockType::GRASS:
+		voxel->LoadFile("Grass.xml");
+		isExists = true;
+		break;
+	case _BlockType::DIRT:
+		voxel->LoadFile("Dirt.xml");
+		isExists = true;
+		break;
+	default:
+		isExists = false;
+		break;
+	}
 }
 
 Block::~Block()
@@ -13,10 +24,9 @@ Block::~Block()
 
 }
 
-void Block::Init()
+void Block::RenderHierarchy()
 {
-
-
+	voxel->RenderHierarchy();
 }
 
 void Block::Release()
@@ -26,29 +36,10 @@ void Block::Release()
 
 void Block::Update()
 {
-	ImGui::Begin("Hierarchy");
-	voxel->RenderHierarchy();
-	ImGui::End();
-
 	voxel->Update();
-}
-
-void Block::LateUpdate()
-{
-
-}
-
-void Block::PreRender()
-{
-
 }
 
 void Block::Render()
 {
 	voxel->Render();
-}
-
-void Block::ResizeScreen()
-{
-
 }

@@ -2,10 +2,6 @@
 
 Scene_Main::Scene_Main()
 {
-	cam = Camera::Create();
-	Camera::main = cam;
-
-	test = new Block(0);
 }
 
 Scene_Main::~Scene_Main()
@@ -15,6 +11,21 @@ Scene_Main::~Scene_Main()
 
 void Scene_Main::Init()
 {
+	sky = Sky::Create();
+	sky->LoadFile("");
+
+	cam = Camera::Create();
+	cam->LoadFile("cam.xml");
+	Camera::main = cam;
+	for (int x = 0; x < SIZE_X; x++)
+	{
+		for (int z = 0; z < SIZE_Z; z++)
+		{
+			chunk[x][z] = new Chunk();
+			chunk[x][z]->SetWorldPos(Vector3(x, 0, z));
+			chunk[x][z]->Update();
+		}
+	}
 }
 
 void Scene_Main::Release()
@@ -29,15 +40,23 @@ void Scene_Main::Update()
 
 	ImGui::Begin("Hierarchy");
 	cam->RenderHierarchy();
+
 	ImGui::End();
 
 	cam->Update();
-	test->Update();
 }
 
 void Scene_Main::LateUpdate()
 {
+	for (int x = 0; x < SIZE_X; x++)
+	{
+		for (int z = 0; z < SIZE_Z; z++)
+		{
+			Vector3 dis;
 
+			cout << dis.x << endl;
+		}
+	}
 }
 
 void Scene_Main::PreRender()
@@ -47,7 +66,15 @@ void Scene_Main::PreRender()
 
 void Scene_Main::Render()
 {
-	test->Render();
+	LIGHT->Set();
+	cam->Set();
+	for (int x = 0; x < SIZE_X; x++)
+	{
+		for (int z = 0; z < SIZE_Z; z++)
+		{
+			chunk[x][z]->Render();
+		}
+	}
 }
 
 void Scene_Main::ResizeScreen()
