@@ -22,7 +22,6 @@
     <ClInclude Include="Block.h" />
     <ClInclude Include="Chunk.h" />
     <ClInclude Include="Main.h" />
-    <ClInclude Include="Scene1.h" />
     <ClInclude Include="Scene_Main.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
@@ -30,7 +29,6 @@
     <ClCompile Include="Block.cpp" />
     <ClCompile Include="Chunk.cpp" />
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="Scene1.cpp" />
     <ClCompile Include="Scene_Main.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

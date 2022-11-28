@@ -13,6 +13,10 @@ Block::Block(_BlockType type)
 		voxel->LoadFile("Dirt.xml");
 		isExists = true;
 		break;
+	case _BlockType::STONE:
+		voxel->LoadFile("Stone.xml");
+		isExists = true;
+		break;
 	default:
 		isExists = false;
 		break;

@@ -11,8 +11,6 @@ Scene_Main::~Scene_Main()
 
 void Scene_Main::Init()
 {
-	sky = Sky::Create();
-	sky->LoadFile("");
 
 	cam = Camera::Create();
 	cam->LoadFile("cam.xml");
@@ -48,15 +46,7 @@ void Scene_Main::Update()
 
 void Scene_Main::LateUpdate()
 {
-	for (int x = 0; x < SIZE_X; x++)
-	{
-		for (int z = 0; z < SIZE_Z; z++)
-		{
-			Vector3 dis;
 
-			cout << dis.x << endl;
-		}
-	}
 }
 
 void Scene_Main::PreRender()

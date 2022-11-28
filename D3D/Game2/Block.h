@@ -3,7 +3,8 @@
 enum class _BlockType
 {
 	GRASS,
-	DIRT
+	DIRT,
+	STONE
 };
 
 class Block
@@ -11,7 +12,7 @@ class Block
 private:
 
 public:
-	Actor* voxel;
+	Actor*	voxel;
 	bool	isExists;
 	Block(_BlockType type);
 	~Block();

@@ -1,0 +1,74 @@
+<Root Name="Blcok" Visible="true" ObType="1">
+    <Transform>
+        <Position X="0" Y="0" Z="0"/>
+        <Scale X="1" Y="1" Z="1"/>
+        <Rotation X="0" Y="0" Z="0"/>
+    </Transform>
+    <Children Size="6"/>
+    <Child0 Name="Back" Visible="true" ObType="0">
+        <Mesh File="voxel.mesh"/>
+        <Shader File="4.Cube.hlsl"/>
+        <Material File="Stone.mtl"/>
+        <Transform>
+            <Position X="0" Y="0" Z="-1"/>
+            <Scale X="1" Y="1" Z="1"/>
+            <Rotation X="-1.5707964" Y="0" Z="0"/>
+        </Transform>
+        <Children Size="0"/>
+    </Child0>
+    <Child1 Name="Down" Visible="true" ObType="0">
+        <Mesh File="voxel.mesh"/>
+        <Shader File="4.Cube.hlsl"/>
+        <Material File="Stone.mtl"/>
+        <Transform>
+            <Position X="0" Y="-1" Z="0"/>
+            <Scale X="1" Y="1" Z="1"/>
+            <Rotation X="-3.1415927" Y="0" Z="0"/>
+        </Transform>
+        <Children Size="0"/>
+    </Child1>
+    <Child2 Name="Front" Visible="true" ObType="0">
+        <Mesh File="voxel.mesh"/>
+        <Shader File="4.Cube.hlsl"/>
+        <Material File="Stone.mtl"/>
+        <Transform>
+            <Position X="0" Y="0" Z="1"/>
+            <Scale X="1" Y="1" Z="1"/>
+            <Rotation X="-1.5707964" Y="0" Z="3.1415927"/>
+        </Transform>
+        <Children Size="0"/>
+    </Child2>
+    <Child3 Name="Left" Visible="true" ObType="0">
+        <Mesh File="voxel.mesh"/>
+        <Shader File="4.Cube.hlsl"/>
+        <Material File="Stone.mtl"/>
+        <Transform>
+            <Position X="-1" Y="0" Z="0"/>
+            <Scale X="1" Y="1" Z="1"/>
+            <Rotation X="-1.5707964" Y="1.5707964" Z="0"/>
+        </Transform>
+        <Children Size="0"/>
+    </Child3>
+    <Child4 Name="Light" Visible="true" ObType="0">
+        <Mesh File="voxel.mesh"/>
+        <Shader File="4.Cube.hlsl"/>
+        <Material File="Stone.mtl"/>
+        <Transform>
+            <Position X="1" Y="0" Z="0"/>
+            <Scale X="1" Y="1" Z="1"/>
+            <Rotation X="-1.5707964" Y="-1.5707964" Z="0"/>
+        </Transform>
+        <Children Size="0"/>
+    </Child4>
+    <Child5 Name="Up" Visible="true" ObType="0">
+        <Mesh File="voxel.mesh"/>
+        <Shader File="4.Cube.hlsl"/>
+        <Material File="Stone.mtl"/>
+        <Transform>
+            <Position X="0" Y="1" Z="0"/>
+            <Scale X="1" Y="1" Z="1"/>
+            <Rotation X="0" Y="0" Z="0"/>
+        </Transform>
+        <Children Size="0"/>
+    </Child5>
+</Root>

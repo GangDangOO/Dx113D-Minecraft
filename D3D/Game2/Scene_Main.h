@@ -1,12 +1,11 @@
 #pragma once
-#define SIZE_X 5
-#define SIZE_Z 5
+#define SIZE_X 1
+#define SIZE_Z 1
 
 class Scene_Main : public Scene
 {
 private:
 	Camera* cam;
-	Sky*	sky;
 
 	Chunk* chunk[SIZE_X][SIZE_Z];
 public:

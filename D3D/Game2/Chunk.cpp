@@ -13,8 +13,14 @@ Chunk::Chunk()
 				case 0:
 					block[x][y][z] = new Block(_BlockType::GRASS);
 					break;
-				default:
+				case 1:
+				case 2:
+				case 3:
+				case 4:
 					block[x][y][z] = new Block(_BlockType::DIRT);
+					break;
+				default:
+					block[x][y][z] = new Block(_BlockType::STONE);
 					break;
 				}
 				block[x][y][z]->voxel->SetWorldPos(Vector3(x * 2, y * -2, z * 2));
@@ -44,6 +50,16 @@ Chunk::Chunk()
 					block[x][y][z]->voxel->Find("Up")->visible = false;
 				if (y + 1 < SIZE_Y && block[x][y + 1][z]->isExists)
 					block[x][y][z]->voxel->Find("Down")->visible = false;
+
+				if (!block[x][y][z]->voxel->Find("Left")->visible &&
+					!block[x][y][z]->voxel->Find("Light")->visible &&
+					!block[x][y][z]->voxel->Find("Back")->visible &&
+					!block[x][y][z]->voxel->Find("Front")->visible &&
+					!block[x][y][z]->voxel->Find("Up")->visible &&
+					!block[x][y][z]->voxel->Find("Down")->visible)
+				{
+					block[x][y][z]->voxel->visible = false;
+				}
 			}
 		}
 	}

@@ -3,5 +3,4 @@
 #pragma comment (lib,"../Build/2DFrameWork/2DFrameWork.lib")
 #include "Block.h"
 #include "Chunk.h"
-#include "Scene1.h"
 #include "Scene_Main.h"

@@ -1,6 +1,6 @@
 #pragma once
 #define SIZE_XZ 16
-#define SIZE_Y 1
+#define SIZE_Y 16
 
 class Chunk
 {
