@@ -4,31 +4,16 @@
   BlendState.cpp
   Camera.cpp
   Collider.cpp
+  CubeRenderTarget.cpp
   DepthState.cpp
   Dijkstra.cpp
   Direct3D11.cpp
   Dwrite.cpp
-  CubeRenderTarget.cpp
   Environment.cpp
-  GameObject.cpp
   GOImGui.cpp
+  GOSaveLoad.cpp
+  GameObject.cpp
   Gui.cpp
-  Input.cpp
-D:\Github\Dx113D-Minecraft\D3D\2DFrameWork\Environment.cpp(69,51): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\Github\Dx113D-Minecraft\D3D\2DFrameWork\CubeRenderTarget.cpp(73,23): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\Github\Dx113D-Minecraft\D3D\2DFrameWork\CubeRenderTarget.cpp(74,24): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\Github\Dx113D-Minecraft\D3D\2DFrameWork\CubeRenderTarget.cpp(98,16): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\Github\Dx113D-Minecraft\D3D\2DFrameWork\CubeRenderTarget.cpp(99,17): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\Github\Dx113D-Minecraft\D3D\2DFrameWork\CubeRenderTarget.cpp(114,16): warning C4244: '=': 'float'에서 'UINT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\Github\Dx113D-Minecraft\D3D\2DFrameWork\CubeRenderTarget.cpp(115,17): warning C4244: '=': 'float'에서 'UINT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\Github\Dx113D-Minecraft\D3D\2DFrameWork\Environment.cpp(130,23): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\Github\Dx113D-Minecraft\D3D\2DFrameWork\Environment.cpp(130,16): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\Github\Dx113D-Minecraft\D3D\2DFrameWork\Environment.cpp(134,23): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\Github\Dx113D-Minecraft\D3D\2DFrameWork\Environment.cpp(134,16): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\Github\Dx113D-Minecraft\D3D\2DFrameWork\CubeRenderTarget.cpp(154,16): warning C4244: '=': 'float'에서 'UINT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\Github\Dx113D-Minecraft\D3D\2DFrameWork\CubeRenderTarget.cpp(155,17): warning C4244: '=': 'float'에서 'UINT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\Github\Dx113D-Minecraft\D3D\2DFrameWork\CubeRenderTarget.cpp(177,23): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\Github\Dx113D-Minecraft\D3D\2DFrameWork\CubeRenderTarget.cpp(178,24): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 D:\Github\Dx113D-Minecraft\D3D\2DFrameWork\Dijkstra.cpp(11,12): warning C4267: '인수': 'size_t'에서 'const _Kty'(으)로 변환하면서 데이터가 손실될 수 있습니다.
           with
           [
@@ -38,6 +23,22 @@ D:\Github\Dx113D-Minecraft\D3D\2DFrameWork\Dijkstra.cpp(17,17): warning C4267: '
 D:\Github\Dx113D-Minecraft\D3D\2DFrameWork\Dijkstra.cpp(140,29): warning C4267: '인수': 'size_t'에서 'UINT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 D:\Github\Dx113D-Minecraft\D3D\2DFrameWork\Dijkstra.cpp(145,45): warning C4267: '인수': 'size_t'에서 'UINT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 D:\Github\Dx113D-Minecraft\D3D\2DFrameWork\Dwrite.cpp(176,5): warning C4267: '인수': 'size_t'에서 'UINT32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\Dx113D-Minecraft\D3D\2DFrameWork\Environment.cpp(69,51): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\Dx113D-Minecraft\D3D\2DFrameWork\Environment.cpp(130,23): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\Dx113D-Minecraft\D3D\2DFrameWork\Environment.cpp(130,16): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\Dx113D-Minecraft\D3D\2DFrameWork\Environment.cpp(134,23): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\Dx113D-Minecraft\D3D\2DFrameWork\Environment.cpp(134,16): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\Dx113D-Minecraft\D3D\2DFrameWork\CubeRenderTarget.cpp(73,23): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\Dx113D-Minecraft\D3D\2DFrameWork\CubeRenderTarget.cpp(74,24): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\Dx113D-Minecraft\D3D\2DFrameWork\CubeRenderTarget.cpp(98,16): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\Dx113D-Minecraft\D3D\2DFrameWork\CubeRenderTarget.cpp(99,17): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\Dx113D-Minecraft\D3D\2DFrameWork\CubeRenderTarget.cpp(114,16): warning C4244: '=': 'float'에서 'UINT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\Dx113D-Minecraft\D3D\2DFrameWork\CubeRenderTarget.cpp(115,17): warning C4244: '=': 'float'에서 'UINT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\Dx113D-Minecraft\D3D\2DFrameWork\CubeRenderTarget.cpp(154,16): warning C4244: '=': 'float'에서 'UINT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\Dx113D-Minecraft\D3D\2DFrameWork\CubeRenderTarget.cpp(155,17): warning C4244: '=': 'float'에서 'UINT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\Dx113D-Minecraft\D3D\2DFrameWork\CubeRenderTarget.cpp(177,23): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\Dx113D-Minecraft\D3D\2DFrameWork\CubeRenderTarget.cpp(178,24): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Input.cpp
   Light.cpp
   Material.cpp
   Mesh.cpp
@@ -48,7 +49,6 @@ D:\Github\Dx113D-Minecraft\D3D\2DFrameWork\Dwrite.cpp(176,5): warning C4267: '�
   RasterState.cpp
   RenderTarget.cpp
   ResourceManager.cpp
-  GOSaveLoad.cpp
   SceneManager.cpp
   Shader.cpp
   Shadow.cpp

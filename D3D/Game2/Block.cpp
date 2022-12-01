@@ -1,7 +1,8 @@
 #include "stdafx.h"
 
-Block::Block(_BlockType type)
+Block::Block(_BlockType _type)
 {
+	type = _type;
 	voxel = Actor::Create();
 	switch (type)
 	{

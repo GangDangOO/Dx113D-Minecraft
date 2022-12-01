@@ -13,8 +13,9 @@ private:
 
 public:
 	Actor*	voxel;
+	_BlockType type;
 	bool	isExists;
-	Block(_BlockType type);
+	Block(_BlockType _type);
 	~Block();
 	void	RenderHierarchy();
 	void	Release();

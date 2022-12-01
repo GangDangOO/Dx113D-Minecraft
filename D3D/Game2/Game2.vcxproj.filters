@@ -12,6 +12,9 @@
     <ClInclude Include="Chunk.h">
       <Filter>System</Filter>
     </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Player</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
@@ -24,6 +27,9 @@
     <ClCompile Include="Chunk.cpp">
       <Filter>System</Filter>
     </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Player</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Scene">
@@ -34,6 +40,9 @@
     </Filter>
     <Filter Include="System">
       <UniqueIdentifier>{723def94-cf3b-4f4b-9923-e2bc14951610}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Player">
+      <UniqueIdentifier>{4c7b9121-d870-4227-bd58-e7553fc6f15d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

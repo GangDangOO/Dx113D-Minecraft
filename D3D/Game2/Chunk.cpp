@@ -24,9 +24,44 @@ Chunk::Chunk()
 					break;
 				}
 				block[x][y][z]->voxel->SetWorldPos(Vector3(x * 2, y * -2, z * 2));
+				arr.push_back(*block[x][y][z]);
 			}
 		}
 	}
+	Update();
+}
+
+Chunk::~Chunk()
+{
+
+}
+
+void Chunk::SetWorldPos(Vector3 pos)
+{
+	Vector3 move = Vector3(pos.x * 2 * SIZE_XZ, 0, pos.z * 2 * SIZE_XZ);
+	for (int x = 0; x < SIZE_XZ; x++)
+	{
+		for (int y = 0; y < SIZE_Y; y++)
+		{
+			for (int z = 0; z < SIZE_XZ; z++)
+			{
+				block[x][y][z]->voxel->MoveWorldPos(move);
+			}
+		}
+	}
+	Update();
+}
+
+void Chunk::RenderHierarchy()
+{
+	for (int i = 0; i < arr.size(); i++)
+	{
+		arr[i].RenderHierarchy();
+	}
+}
+
+void Chunk::SetRender()
+{
 	for (int x = 0; x < SIZE_XZ; x++)
 	{
 		for (int y = 0; y < SIZE_Y; y++)
@@ -50,7 +85,107 @@ Chunk::Chunk()
 					block[x][y][z]->voxel->Find("Up")->visible = false;
 				if (y + 1 < SIZE_Y && block[x][y + 1][z]->isExists)
 					block[x][y][z]->voxel->Find("Down")->visible = false;
+			}
+		}
+	}
+	Update();
+}
 
+void Chunk::SetMesh()
+{
+	for (int x = 0; x < SIZE_XZ; x++)
+	{
+		for (int z = 0; z < SIZE_XZ; z++)
+		{
+			for (int y = 0; y < SIZE_Y; y++)
+			{
+				for (int i = 0; i < 6; i++)
+				{
+					string name;
+					switch (i)
+					{
+					case 0:
+						name = "Left";
+						break;
+					case 1:
+						name = "Light";
+						break;
+					case 2:
+						name = "Front";
+						break;
+					case 3:
+						name = "Back";
+						break;
+					case 4:
+						name = "Up";
+						break;
+					case 5:
+						name = "Down";
+						break;
+					default:
+						return;
+						break;
+					}
+					// 위 아래 그리딩 메쉬
+					if (i >= 4)
+					{
+						for (int w = z + 1; w < SIZE_XZ; w++)
+						{
+							if (block[x][y][z]->voxel->Find(name)->visible && block[x][y][z]->type == block[x][y][w]->type)
+							{
+								block[x][y][w]->voxel->Find(name)->visible = false;
+								if (w == 15)
+								{
+									block[x][y][z]->voxel->Find(name)->scale.z = (w - z) + 1;
+									block[x][y][z]->voxel->Find(name)->MoveWorldPos(Vector3(0, 0, (w - z)));
+								}
+							}
+							else
+							{
+								block[x][y][z]->voxel->Find(name)->scale.z = (w - z) + 1;
+								block[x][y][z]->voxel->Find(name)->MoveWorldPos(Vector3(0, 0, (w - z)));
+								break;
+							}
+						}
+					}
+					// 옆쪽 그리딩 메쉬
+					else if (block[x][y][z]->voxel->Find(name)->visible)
+					{
+						for (int w = y + 1; w < SIZE_Y; w++)
+						{
+							if (block[x][y][z]->voxel->Find(name)->visible && block[x][y][z]->type == block[x][w][z]->type)
+							{
+								block[x][w][z]->voxel->Find(name)->visible = false;
+								if (w == 15)
+								{
+									block[x][y][z]->voxel->Find(name)->scale.z = (w - y);
+									block[x][y][z]->voxel->Find(name)->MoveWorldPos(Vector3(0, -(w - y) + 1, 0));
+								}
+							}
+							else
+							{
+								block[x][y][z]->voxel->Find(name)->scale.z = (w - y);
+								block[x][y][z]->voxel->Find(name)->MoveWorldPos(Vector3(0, -(w - y) + 1, 0));
+								break;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	Update();
+}
+
+int Chunk::SetChunk()
+{
+	arr.clear();
+	for (int x = 0; x < SIZE_XZ; x++)
+	{
+		for (int y = 0; y < SIZE_Y; y++)
+		{
+			for (int z = 0; z < SIZE_XZ; z++)
+			{
 				if (!block[x][y][z]->voxel->Find("Left")->visible &&
 					!block[x][y][z]->voxel->Find("Light")->visible &&
 					!block[x][y][z]->voxel->Find("Back")->visible &&
@@ -60,70 +195,30 @@ Chunk::Chunk()
 				{
 					block[x][y][z]->voxel->visible = false;
 				}
+				else
+				{
+					arr.push_back(*block[x][y][z]);
+				}
 			}
 		}
 	}
-	pos = block[SIZE_XZ / 2][0][SIZE_XZ / 2]->voxel->GetWorldPos();
-}
-
-Chunk::~Chunk()
-{
-
-}
-
-void Chunk::SetWorldPos(Vector3 pos)
-{
-	Vector3 move = Vector3(pos.x * 2 * SIZE_XZ, 0, pos.z * 2 * SIZE_XZ);
-	for (int x = 0; x < SIZE_XZ; x++)
-	{
-		for (int y = 0; y < SIZE_Y; y++)
-		{
-			for (int z = 0; z < SIZE_XZ; z++)
-			{
-				block[x][y][z]->voxel->MoveWorldPos(move);
-			}
-		}
-	}
-}
-
-void Chunk::RenderHierarchy()
-{
-	for (int x = 0; x < SIZE_XZ; x++)
-	{
-		for (int y = 0; y < SIZE_Y; y++)
-		{
-			for (int z = 0; z < SIZE_XZ; z++)
-			{
-				block[x][y][z]->RenderHierarchy();
-			}
-		}
-	}
+	Update();
+	return arr.size();
 }
 
 void Chunk::Update()
 {
-	for (int x = 0; x < SIZE_XZ; x++)
+	for (int i = 0; i < arr.size(); i++)
 	{
-		for (int y = 0; y < SIZE_Y; y++)
-		{
-			for (int z = 0; z < SIZE_XZ; z++)
-			{
-				block[x][y][z]->Update();
-			}
-		}
+		arr[i].Update();
 	}
+	pos = block[SIZE_XZ / 2][0][SIZE_XZ / 2]->voxel->GetWorldPos();
 }
 
 void Chunk::Render()
 {
-	for (int x = 0; x < SIZE_XZ; x++)
+	for (int i = 0; i < arr.size(); i++)
 	{
-		for (int y = 0; y < SIZE_Y; y++)
-		{
-			for (int z = 0; z < SIZE_XZ; z++)
-			{
-				block[x][y][z]->Render();
-			}
-		}
+		arr[i].Render();
 	}
 }
