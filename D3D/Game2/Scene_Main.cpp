@@ -70,14 +70,14 @@ void Scene_Main::Update()
 
 	ImGui::Begin("Hierarchy");
 	cam->RenderHierarchy();
-	for (int x = 0; x < SIZE_X; x++)
+	/*for (int x = 0; x < SIZE_X; x++)
 	{
 		for (int z = 0; z < SIZE_Z; z++)
 		{
-			// chunk[x][z]->RenderHierarchy();
-			// chunk[x][z]->Update();
+			chunk[x][z]->RenderHierarchy();
+			chunk[x][z]->Update();
 		}
-	}
+	}*/
 	ImGui::End();
 
 

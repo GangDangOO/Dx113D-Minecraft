@@ -1,6 +1,6 @@
 #pragma once
-#define SIZE_X 1
-#define SIZE_Z 1
+#define SIZE_X 3
+#define SIZE_Z 3
 
 class Scene_Main : public Scene
 {

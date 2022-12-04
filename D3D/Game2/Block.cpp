@@ -8,18 +8,15 @@ Block::Block(_BlockType _type)
 	{
 	case _BlockType::GRASS:
 		voxel->LoadFile("Grass.xml");
-		isExists = true;
 		break;
 	case _BlockType::DIRT:
 		voxel->LoadFile("Dirt.xml");
-		isExists = true;
 		break;
 	case _BlockType::STONE:
 		voxel->LoadFile("Stone.xml");
-		isExists = true;
 		break;
 	default:
-		isExists = false;
+		voxel->visible = false;
 		break;
 	}
 }

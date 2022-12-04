@@ -15,8 +15,8 @@ private:
     ID3D11Buffer*           indexBuffer;
   
     D3D_PRIMITIVE_TOPOLOGY  primitiveTopology;
-    VertexType              vertexType;
     UINT                    byteWidth;
+    VertexType              vertexType;
 
   
 public:

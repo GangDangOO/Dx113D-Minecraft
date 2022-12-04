@@ -157,7 +157,6 @@ Mesh::Mesh(void* vertices, UINT vertexCount, UINT* indices, UINT indexCount, Ver
     case VertexType::MODEL:
         byteWidth = sizeof(VertexModel);
         break;
-
     case VertexType::TERRAIN:
         byteWidth = sizeof(VertexTerrain);
         break;
@@ -276,7 +275,6 @@ void Mesh::LoadFile(string file)
     in.Open(path);
 
     vertexType = (VertexType)in.UInt();
-
     //ÀÐ±âÀü
     switch (vertexType)
     {

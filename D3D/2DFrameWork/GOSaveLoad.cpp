@@ -240,7 +240,9 @@ void GameObject::LoadObject(Xml::XMLElement* This)
 		{
 			file = component->Attribute("File");
 			SafeReset(mesh);
-			mesh = RESOURCE->meshes.Load(file);
+			// mesh = RESOURCE->meshes.Load(file);
+			mesh = make_shared<Mesh>();
+			mesh->LoadFile(file);
 		}
 	}
 	if (component = This->FirstChildElement("Shader"))
