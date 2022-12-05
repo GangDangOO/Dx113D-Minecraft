@@ -1,74 +1,11 @@
 <Root Name="Block" Visible="true" ObType="1">
+    <Mesh File="0.Voxel.mesh"/>
+    <Shader File="3.Cube.hlsl"/>
+    <Material File="Grass_Top.mtl"/>
     <Transform>
         <Position X="0" Y="0" Z="0"/>
         <Scale X="1" Y="1" Z="1"/>
         <Rotation X="0" Y="0" Z="0"/>
     </Transform>
-    <Children Size="6"/>
-    <Child0 Name="Back" Visible="true" ObType="1">
-        <Mesh File="0.Voxel.mesh"/>
-        <Shader File="3.Cube.hlsl"/>
-        <Material File="Grass_Side.mtl"/>
-        <Transform>
-            <Position X="-0.5" Y="0.5" Z="0"/>
-            <Scale X="1" Y="1" Z="1"/>
-            <Rotation X="1.5707964" Y="-1.5707964" Z="0"/>
-        </Transform>
-        <Children Size="0"/>
-    </Child0>
-    <Child1 Name="Front" Visible="true" ObType="1">
-        <Mesh File="0.Voxel.mesh"/>
-        <Shader File="3.Cube.hlsl"/>
-        <Material File="Grass_Side.mtl"/>
-        <Transform>
-            <Position X="0.5" Y="0.5" Z="0"/>
-            <Scale X="1" Y="1" Z="1"/>
-            <Rotation X="1.5707964" Y="1.5707964" Z="0"/>
-        </Transform>
-        <Children Size="0"/>
-    </Child1>
-    <Child2 Name="Left" Visible="true" ObType="1">
-        <Mesh File="0.Voxel.mesh"/>
-        <Shader File="3.Cube.hlsl"/>
-        <Material File="Grass_Side.mtl"/>
-        <Transform>
-            <Position X="0" Y="0.5" Z="-0.5"/>
-            <Scale X="1" Y="1" Z="1"/>
-            <Rotation X="1.5707964" Y="-3.1415927" Z="0"/>
-        </Transform>
-        <Children Size="0"/>
-    </Child2>
-    <Child3 Name="Right" Visible="true" ObType="1">
-        <Mesh File="0.Voxel.mesh"/>
-        <Shader File="3.Cube.hlsl"/>
-        <Material File="Grass_Side.mtl"/>
-        <Transform>
-            <Position X="0" Y="0.5" Z="0.5"/>
-            <Scale X="1" Y="1" Z="1"/>
-            <Rotation X="1.5707964" Y="0" Z="0"/>
-        </Transform>
-        <Children Size="0"/>
-    </Child3>
-    <Child4 Name="Top" Visible="true" ObType="1">
-        <Mesh File="0.Voxel.mesh"/>
-        <Shader File="3.Cube.hlsl"/>
-        <Material File="Grass_Top.mtl"/>
-        <Transform>
-            <Position X="0" Y="1" Z="0"/>
-            <Scale X="1" Y="1" Z="1"/>
-            <Rotation X="0" Y="0" Z="0"/>
-        </Transform>
-        <Children Size="0"/>
-    </Child4>
-    <Child5 Name="Under" Visible="true" ObType="1">
-        <Mesh File="0.Voxel.mesh"/>
-        <Shader File="3.Cube.hlsl"/>
-        <Material File="Dirt.mtl"/>
-        <Transform>
-            <Position X="0" Y="0" Z="0"/>
-            <Scale X="1" Y="1" Z="1"/>
-            <Rotation X="3.1415927" Y="-3.1415927" Z="0"/>
-        </Transform>
-        <Children Size="0"/>
-    </Child5>
+    <Children Size="0"/>
 </Root>

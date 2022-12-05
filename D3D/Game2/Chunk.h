@@ -1,24 +1,22 @@
 #pragma once
-#define SIZE_XZ 16
-#define SIZE_Y	16
-
+#define Size_X 16
+#define Size_Y 16
+#define Size_Z 16
 class Chunk
 {
 private:
-	Block*		block[SIZE_XZ][SIZE_Y][SIZE_XZ];
-	vector<Block> arr;
+	Block*	block[Size_X][Size_Y][Size_Z];
+	Actor*	voxel[6][Size_X][Size_Y][Size_Z];
+	vector<Actor*> arr;
 public:
-	float		x = -1, y = 0, q = -1, w = 0, e = 1;
-	Vector3		pos;
-
-	Chunk();
+	Vector3	position;
+	Chunk(int posX, int posZ);
 	~Chunk();
-	void SetWorldPos(Vector3 pos);
-	void RenderHierarchy();
-	void SetRender();
-	void SetMesh();
-	int	 SetChunk();
-	void Update();
-	void Render();
+	void	RenderHierarchy();
+	void	SetRendering();
+	void	SetGreedyMeshing();
+	int		SetArray();
+	void	Update();
+	void	Render();
 };
 

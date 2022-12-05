@@ -1,12 +1,12 @@
 #include "stdafx.h"
 
-Chunk::Chunk()
+Chunk::Chunk(int posX, int posZ)
 {
-	for (int x = 0; x < SIZE_XZ; x++)
+	for (int x = 0; x < Size_X; x++)
 	{
-		for (int y = 0; y < SIZE_Y; y++)
+		for (int z = 0; z < Size_Z; z++)
 		{
-			for (int z = 0; z < SIZE_XZ; z++)
+			for (int y = 0; y < Size_Y; y++)
 			{
 				switch (y)
 				{
@@ -17,240 +17,413 @@ Chunk::Chunk()
 				case 2:
 				case 3:
 				case 4:
+				case 5:
 					block[x][y][z] = new Block(_BlockType::DIRT);
 					break;
 				default:
 					block[x][y][z] = new Block(_BlockType::STONE);
 					break;
 				}
-				block[x][y][z]->voxel->SetWorldPos(Vector3(x, -y, z));
-				arr.push_back(*block[x][y][z]);
+				block[x][y][z]->pos = Vector3(posX * Size_X + x, -y, posZ * Size_Z + z);
 			}
 		}
 	}
-	Update();
-}
-
-Chunk::~Chunk()
-{
-
-}
-
-void Chunk::SetWorldPos(Vector3 pos)
-{
-	Vector3 move = Vector3(pos.x * SIZE_XZ, 0, pos.z * SIZE_XZ);
-	for (int x = 0; x < SIZE_XZ; x++)
-	{
-		for (int y = 0; y < SIZE_Y; y++)
-		{
-			for (int z = 0; z < SIZE_XZ; z++)
-			{
-				block[x][y][z]->voxel->MoveWorldPos(move);
-			}
-		}
-	}
-	Update();
+	position = Vector3(posX * Size_X + Size_X * 0.5f, 0.0f, posZ * Size_Z + Size_Z * 0.5f);
+	SetRendering();
+	SetGreedyMeshing();
+	SetArray();
 }
 
 void Chunk::RenderHierarchy()
 {
 	for (int i = 0; i < arr.size(); i++)
 	{
-		arr[i].RenderHierarchy();
+		arr[i]->RenderHierarchy();
 	}
-}
-
-void Chunk::SetRender()
-{
-	for (int x = 0; x < SIZE_XZ; x++)
-	{
-		for (int y = 0; y < SIZE_Y; y++)
-		{
-			for (int z = 0; z < SIZE_XZ; z++)
-			{
-				if (x - 1 >= 0 && block[x - 1][y][z]->voxel->visible)
-					block[x][y][z]->voxel->Find("Back")->visible = false;
-				if (x + 1 < SIZE_XZ && block[x + 1][y][z]->voxel->visible)
-					block[x][y][z]->voxel->Find("Front")->visible = false;
-
-				if (z - 1 >= 0 && block[x][y][z - 1]->voxel->visible)
-					block[x][y][z]->voxel->Find("Left")->visible = false;
-				if (z + 1 < SIZE_XZ && block[x][y][z + 1]->voxel->visible)
-					block[x][y][z]->voxel->Find("Right")->visible = false;
-
-				if (y - 1 >= 0 && block[x][y - 1][z]->voxel->visible)
-					block[x][y][z]->voxel->Find("Top")->visible = false;
-				if (y + 1 < SIZE_Y && block[x][y + 1][z]->voxel->visible)
-					block[x][y][z]->voxel->Find("Under")->visible = false;
-			}
-		}
-	}
-	Update();
-}
-
-void Chunk::SetMesh()
-{
-	for (int x = 0; x < SIZE_XZ; x++)
-	{
-		for (int z = 0; z < SIZE_XZ; z++)
-		{
-			for (int y = 0; y < SIZE_Y; y++)
-			{
-				for (int i = 0; i < 6; i++)
-				{
-					string name;
-					switch (i)
-					{
-					case 0:
-						name = "Left";
-						break;
-					case 1:
-						name = "Right";
-						break;
-					case 2:
-						name = "Front";
-						break;
-					case 3:
-						name = "Back";
-						break;
-					case 4:
-						name = "Top";
-						break;
-					case 5:
-						name = "Under";
-						break;
-					default:
-						return;
-						break;
-					}
-					// 위 아래 그리딩 메쉬a
-					if (block[x][y][z]->voxel->Find(name)->visible)
-					{
-						if (i >= 4)
-						{
-							for (int w = z + 1; w < SIZE_XZ; w++)
-							{
-								if (block[x][y][z]->type == block[x][y][w]->type)
-								{
-									if (block[x][y][w]->voxel->Find(name)->visible)
-										block[x][y][w]->voxel->Find(name)->visible = false;
-									if (w == SIZE_XZ - 1)
-									{
-										if (w - z != 1)
-										{
-											VertexPT* pt = (VertexPT*)block[x][y][z]->voxel->Find(name)->mesh->vertices;
-											pt[1].position.z = (w - z) + 0.5f;
-											pt[1].uv.y = (w - z);
-											pt[2].position.z = (w - z) + 0.5f;
-											pt[2].uv.y = (w - z);
-											block[x][y][z]->voxel->Find(name)->mesh->UpdateMesh();
-										}
-									}
-								}
-								else
-								{
-									if (w - z != 1)
-									{
-										VertexPT* pt = (VertexPT*)block[x][y][z]->voxel->Find(name)->mesh->vertices;
-										pt[1].position.z = (w - z) + 0.5f;
-										pt[1].uv.y = (w - z);
-										pt[2].position.z = (w - z) + 0.5f;
-										pt[2].uv.y = (w - z);
-										block[x][y][z]->voxel->Find(name)->mesh->UpdateMesh();
-									}
-									break;
-								}
-							}
-						}
-						// 옆쪽 그리딩 메쉬
-						else
-						{
-							for (int w = y + 1; w < SIZE_Y; w++)
-							{
-								if (block[x][y][z]->type == block[x][w][z]->type)
-								{
-									if (block[x][w][z]->voxel->Find(name)->visible)
-										block[x][w][z]->voxel->Find(name)->visible = false;
-									if (w == SIZE_Y - 1)
-									{
-										if (w - y != 1)
-										{
-											VertexPT* pt = (VertexPT*)block[x][y][z]->voxel->Find(name)->mesh->vertices;
-											pt[1].position.z = (w - y) + 0.5f;
-											pt[1].uv.y = (w - y);
-											pt[2].position.z = (w - y) + 0.5f;
-											pt[2].uv.y = (w - y);
-											block[x][y][z]->voxel->Find(name)->mesh->UpdateMesh();
-										}
-									}
-								}
-								else
-								{
-									if (w - y != 1)
-									{
-										w--;
-										VertexPT* pt = (VertexPT*)block[x][y][z]->voxel->Find(name)->mesh->vertices;
-										pt[1].position.z = (w - y) + 0.5f;
-										pt[1].uv.y = (w - y);
-										pt[2].position.z = (w - y) + 0.5f;
-										pt[2].uv.y = (w - y);
-										block[x][y][z]->voxel->Find(name)->mesh->UpdateMesh();
-									}
-									break;
-								}
-							}
-						}
-
-					}
-				}
-			}
-		}
-	}
-	Update();
-}
-
-int Chunk::SetChunk()
-{
-	arr.clear();
-	for (int x = 0; x < SIZE_XZ; x++)
-	{
-		for (int y = 0; y < SIZE_Y; y++)
-		{
-			for (int z = 0; z < SIZE_XZ; z++)
-			{
-				if (!block[x][y][z]->voxel->Find("Left")->visible &&
-					!block[x][y][z]->voxel->Find("Right")->visible &&
-					!block[x][y][z]->voxel->Find("Back")->visible &&
-					!block[x][y][z]->voxel->Find("Front")->visible &&
-					!block[x][y][z]->voxel->Find("Top")->visible &&
-					!block[x][y][z]->voxel->Find("Under")->visible)
-				{
-					block[x][y][z]->voxel->visible = false;
-				}
-				else
-				{
-					arr.push_back(*block[x][y][z]);
-				}
-			}
-		}
-	}
-	Update();
-	return arr.size();
 }
 
 void Chunk::Update()
 {
 	for (int i = 0; i < arr.size(); i++)
 	{
-		arr[i].Update();
+		arr[i]->Update();
 	}
-	pos = block[SIZE_XZ / 2][0][SIZE_XZ / 2]->voxel->GetWorldPos();
+}
+
+int Chunk::SetArray()
+{
+	arr.clear();
+	for (int x = 0; x < Size_X; x++)
+	{
+		for (int z = 0; z < Size_Z; z++)
+		{
+			for (int y = 0; y < Size_Y; y++)
+			{
+				for (int n = 0; n < 6; n++)
+				{
+					if (block[x][y][z]->isCheck[n] == true) 
+						arr.push_back(voxel[n][x][y][z]);
+				}
+			}
+		}
+	}
+	return arr.size();
+}
+
+void Chunk::SetGreedyMeshing()
+{
+	for (int x = 0; x < Size_X; x++)
+	{
+		for (int y = 0; y < Size_Y; y++)
+		{
+			for (int z = 0; z < Size_Z; z++)
+			{
+				// 위쪽면 그리딩 메쉬
+				for (int t = x + 1; t < Size_X; t++)
+				{
+					if (block[x][y][z]->type == block[t][y][z]->type)
+					{
+						if (block[t][y][z]->isCheck[(int)_Dir::Top])
+						{
+							block[t][y][z]->isCheck[(int)_Dir::Top] = false;
+							voxel[(int)_Dir::Top][t][y][z]->visible = false;
+						}
+						if (t == Size_X - 1)
+						{
+							if (voxel[(int)_Dir::Top][x][y][z] != nullptr)
+							{
+								VertexPT* vertex = (VertexPT*)voxel[(int)_Dir::Top][x][y][z]->mesh->vertices;
+								vertex[2].position.x = t - x + 0.5f;
+								vertex[2].uv.x = t - x;
+								vertex[3].position.x = t - x + 0.5f;
+								vertex[3].uv.x = t - x;
+								voxel[(int)_Dir::Top][x][y][z]->mesh->UpdateMesh();
+							}
+							break;
+						}
+					}
+					else if (t - x != 1) {
+						if (voxel[(int)_Dir::Top][x][y][z] != nullptr)
+						{
+							t--;
+							VertexPT* vertex = (VertexPT*)voxel[(int)_Dir::Top][x][y][z]->mesh->vertices;
+							vertex[2].position.x = t - x + 0.5f;
+							vertex[2].uv.x = t - x;
+							vertex[3].position.x = t - x + 0.5f;
+							vertex[3].uv.x = t - x;
+							voxel[(int)_Dir::Top][x][y][z]->mesh->UpdateMesh();
+						}
+						break;
+					}
+					else
+						break;
+				}
+				// 아래쪽면 그리딩 메쉬
+				for (int t = x + 1; t < Size_X; t++)
+				{
+					if (block[x][y][z]->type == block[t][y][z]->type)
+					{
+						if (block[t][y][z]->isCheck[(int)_Dir::Under])
+						{
+							block[t][y][z]->isCheck[(int)_Dir::Under] = false;
+							voxel[(int)_Dir::Under][t][y][z]->visible = false;
+						}
+						if (t == Size_X - 1)
+						{
+							if (voxel[(int)_Dir::Under][x][y][z] != nullptr)
+							{
+								VertexPT* vertex = (VertexPT*)voxel[(int)_Dir::Under][x][y][z]->mesh->vertices;
+								vertex[2].position.x = t - x + 0.5f;
+								vertex[2].uv.x = t - x;
+								vertex[3].position.x = t - x + 0.5f;
+								vertex[3].uv.x = t - x;
+								voxel[(int)_Dir::Under][x][y][z]->mesh->UpdateMesh();
+							}
+						}
+					}
+					else if (t - x != 1) {
+						if (voxel[(int)_Dir::Under][x][y][z] != nullptr)
+						{
+							t--;
+							VertexPT* vertex = (VertexPT*)voxel[(int)_Dir::Under][x][y][z]->mesh->vertices;
+							vertex[2].position.x = t - x + 0.5f;
+							vertex[2].uv.x = t - x;
+							vertex[3].position.x = t - x + 0.5f;
+							vertex[3].uv.x = t - x;
+							voxel[(int)_Dir::Under][x][y][z]->mesh->UpdateMesh();
+						}
+						break;
+					}
+					else
+						break;
+				}
+				// 앞쪽면 그리딩 메쉬
+				for (int t = y + 1; t < Size_Y; t++)
+				{
+					if (block[x][y][z]->type == block[x][t][z]->type)
+					{
+						if (block[x][t][z]->isCheck[(int)_Dir::Front])
+						{
+							block[x][t][z]->isCheck[(int)_Dir::Front] = false;
+							voxel[(int)_Dir::Front][x][t][z]->visible = false;
+						}
+						if (t == Size_Y - 1)
+						{
+							if (voxel[(int)_Dir::Front][x][y][z] != nullptr)
+							{
+								VertexPT* vertex = (VertexPT*)voxel[(int)_Dir::Front][x][y][z]->mesh->vertices;
+								vertex[0].position.z = -(t - y + 0.5f);
+								vertex[0].uv.y = t - y;
+								vertex[3].position.z = -(t - y + 0.5f);
+								vertex[3].uv.y = t - y;
+								voxel[(int)_Dir::Front][x][y][z]->mesh->UpdateMesh();
+							}
+							break;
+						}
+					}
+					else if (t - y != 1) {
+						if (voxel[(int)_Dir::Front][x][y][z] != nullptr)
+						{
+							t--;
+							VertexPT* vertex = (VertexPT*)voxel[(int)_Dir::Front][x][y][z]->mesh->vertices;
+							vertex[0].position.z = -(t - y + 0.5f);
+							vertex[0].uv.y = t - y + 1;
+							vertex[3].position.z = -(t - y + 0.5f);
+							vertex[3].uv.y = t - y + 1;
+							voxel[(int)_Dir::Front][x][y][z]->mesh->UpdateMesh();
+						}
+						break;
+					}
+					else
+						break;
+				}
+				// 뒤쪽면 그리딩 메쉬
+				for (int t = y + 1; t < Size_Y; t++)
+				{
+					if (block[x][y][z]->type == block[x][t][z]->type)
+					{
+						if (block[x][t][z]->isCheck[(int)_Dir::Back])
+						{
+							block[x][t][z]->isCheck[(int)_Dir::Back] = false;
+							voxel[(int)_Dir::Back][x][t][z]->visible = false;
+						}
+						if (t == Size_Y - 1)
+						{
+							if (voxel[(int)_Dir::Back][x][y][z] != nullptr)
+							{
+								VertexPT* vertex = (VertexPT*)voxel[(int)_Dir::Back][x][y][z]->mesh->vertices;
+								vertex[1].position.z = (t - y + 0.5f);
+								vertex[1].uv.y = t - y;
+								vertex[2].position.z = (t - y + 0.5f);
+								vertex[2].uv.y = t - y;
+								voxel[(int)_Dir::Back][x][y][z]->mesh->UpdateMesh();
+							}
+							break;
+						}
+					}
+					else if (t - y != 1) {
+						if (voxel[(int)_Dir::Back][x][y][z] != nullptr)
+						{
+							t--;
+							VertexPT* vertex = (VertexPT*)voxel[(int)_Dir::Back][x][y][z]->mesh->vertices;
+							vertex[1].position.z = (t - y + 0.5f);
+							vertex[1].uv.y = t - y + 1;
+							vertex[2].position.z = (t - y + 0.5f);
+							vertex[2].uv.y = t - y + 1;
+							voxel[(int)_Dir::Back][x][y][z]->mesh->UpdateMesh();
+						}
+						break;
+					}
+					else
+						break;
+				}
+				// 왼쪽면 그리딩 메쉬
+				for (int t = y + 1; t < Size_Y; t++)
+				{
+					if (block[x][y][z]->type == block[x][t][z]->type)
+					{
+						if (block[x][t][z]->isCheck[(int)_Dir::Left])
+						{
+							block[x][t][z]->isCheck[(int)_Dir::Left] = false;
+							voxel[(int)_Dir::Left][x][t][z]->visible = false;
+						}
+						if (t == Size_Y - 1)
+						{
+							if (voxel[(int)_Dir::Left][x][y][z] != nullptr)
+							{
+								VertexPT* vertex = (VertexPT*)voxel[(int)_Dir::Left][x][y][z]->mesh->vertices;
+								vertex[0].position.z = -(t - y + 0.5f);
+								vertex[0].uv.y = t - y;
+								vertex[3].position.z = -(t - y + 0.5f);
+								vertex[3].uv.y = t - y;
+								voxel[(int)_Dir::Left][x][y][z]->mesh->UpdateMesh();
+							}
+							break;
+						}
+					}
+					else if (t - y != 1) {
+						if (voxel[(int)_Dir::Left][x][y][z] != nullptr)
+						{
+							t--;
+							VertexPT* vertex = (VertexPT*)voxel[(int)_Dir::Left][x][y][z]->mesh->vertices;
+							vertex[0].position.z = -(t - y + 0.5f);
+							vertex[0].uv.y = t - y + 1;
+							vertex[3].position.z = -(t - y + 0.5f);
+							vertex[3].uv.y = t - y + 1;
+							voxel[(int)_Dir::Left][x][y][z]->mesh->UpdateMesh();
+						}
+						break;
+					}
+					else
+						break;
+				}
+				// 오른쪽면 그리딩 메쉬
+				for (int t = y + 1; t < Size_Y; t++)
+				{
+					if (block[x][y][z]->type == block[x][t][z]->type)
+					{
+						if (block[x][t][z]->isCheck[(int)_Dir::Right])
+						{
+							block[x][t][z]->isCheck[(int)_Dir::Right] = false;
+							voxel[(int)_Dir::Right][x][t][z]->visible = false;
+						}
+						if (t == Size_Y - 1)
+						{
+							if (voxel[(int)_Dir::Right][x][y][z] != nullptr)
+							{
+								VertexPT* vertex = (VertexPT*)voxel[(int)_Dir::Right][x][y][z]->mesh->vertices;
+								vertex[1].position.z = (t - y + 0.5f);
+								vertex[1].uv.y = t - y;
+								vertex[2].position.z = (t - y + 0.5f);
+								vertex[2].uv.y = t - y;
+								voxel[(int)_Dir::Right][x][y][z]->mesh->UpdateMesh();
+							}
+							break;
+						}
+					}
+					else if (t - y != 1) {
+						if (voxel[(int)_Dir::Right][x][y][z] != nullptr)
+						{
+							t--;
+							VertexPT* vertex = (VertexPT*)voxel[(int)_Dir::Right][x][y][z]->mesh->vertices;
+							vertex[1].position.z = (t - y + 0.5f);
+							vertex[1].uv.y = t - y + 1;
+							vertex[2].position.z = (t - y + 0.5f);
+							vertex[2].uv.y = t - y + 1;
+							voxel[(int)_Dir::Right][x][y][z]->mesh->UpdateMesh();
+						}
+						break;
+					}
+					else
+						break;
+				}
+			}
+		}
+	}
+}
+
+void Chunk::SetRendering()
+{
+	for (int x = 0; x < Size_X; x++)
+	{
+		for (int z = 0; z < Size_Z; z++)
+		{
+			for (int y = 0; y < Size_Y; y++)
+			{
+				string file;
+				switch (block[x][y][z]->type)
+				{
+				case _BlockType::GRASS:
+					file = "Grass.xml";
+					break;
+				case _BlockType::DIRT:
+					file = "Dirt.xml";
+					break;
+				case _BlockType::STONE:
+					file = "Stone.xml";
+					break;
+				default:
+					break;
+				}
+				// 윗면 렌더링
+				if (y == 0 || block[x][y - 1][z]->type == _BlockType::AIR)
+				{
+					block[x][y][z]->isCheck[(int)_Dir::Top] = true;
+					voxel[(int)_Dir::Top][x][y][z] = Actor::Create();
+					voxel[(int)_Dir::Top][x][y][z]->LoadFile(file);
+					voxel[(int)_Dir::Top][x][y][z]->SetWorldPos(block[x][y][z]->pos);
+					voxel[(int)_Dir::Top][x][y][z]->MoveWorldPos(Vector3(0, 1, 0));
+					voxel[(int)_Dir::Top][x][y][z]->Update();
+					arr.push_back(voxel[(int)_Dir::Top][x][y][z]);
+				}
+				// 아랫면 렌더링
+				if (y == Size_Y - 1 || block[x][y + 1][z]->type == _BlockType::AIR)
+				{
+					block[x][y][z]->isCheck[(int)_Dir::Under] = true;
+					voxel[(int)_Dir::Under][x][y][z] = Actor::Create();
+					voxel[(int)_Dir::Under][x][y][z]->LoadFile(file);
+					voxel[(int)_Dir::Under][x][y][z]->SetWorldPos(block[x][y][z]->pos);
+					voxel[(int)_Dir::Under][x][y][z]->rotation = Vector3(180, 0, 0) * TORADIAN;
+					voxel[(int)_Dir::Under][x][y][z]->Update();
+					arr.push_back(voxel[(int)_Dir::Under][x][y][z]);
+				}
+				// 앞쪽면 렌더링
+				if (z == 0 || block[x][y][z - 1]->type == _BlockType::AIR)
+				{
+					block[x][y][z]->isCheck[(int)_Dir::Front] = true;
+					voxel[(int)_Dir::Front][x][y][z] = Actor::Create();
+					voxel[(int)_Dir::Front][x][y][z]->LoadFile(file);
+					voxel[(int)_Dir::Front][x][y][z]->SetWorldPos(block[x][y][z]->pos);
+					voxel[(int)_Dir::Front][x][y][z]->MoveWorldPos(Vector3(0, 0.5f, -0.5f));
+					voxel[(int)_Dir::Front][x][y][z]->rotation = Vector3(-90, 0, 0) * TORADIAN;
+					voxel[(int)_Dir::Front][x][y][z]->Update();
+					arr.push_back(voxel[(int)_Dir::Front][x][y][z]);
+				}
+				// 뒤쪽면 렌더링
+				if (z == Size_Z - 1 || block[x][y][z + 1]->type == _BlockType::AIR)
+				{
+					block[x][y][z]->isCheck[(int)_Dir::Back] = true;
+					voxel[(int)_Dir::Back][x][y][z] = Actor::Create();
+					voxel[(int)_Dir::Back][x][y][z]->LoadFile(file);
+					voxel[(int)_Dir::Back][x][y][z]->SetWorldPos(block[x][y][z]->pos);
+					voxel[(int)_Dir::Back][x][y][z]->MoveWorldPos(Vector3(0, 0.5f, +0.5f));
+					voxel[(int)_Dir::Back][x][y][z]->rotation = Vector3(90, 0, 0) * TORADIAN;
+					voxel[(int)_Dir::Back][x][y][z]->Update();
+					arr.push_back(voxel[(int)_Dir::Back][x][y][z]);
+				}
+				// 왼쪽면 렌더링
+				if (x == 0 || block[x - 1][y][z]->type == _BlockType::AIR)
+				{
+					block[x][y][z]->isCheck[(int)_Dir::Left] = true;
+					voxel[(int)_Dir::Left][x][y][z] = Actor::Create();
+					voxel[(int)_Dir::Left][x][y][z]->LoadFile(file);
+					voxel[(int)_Dir::Left][x][y][z]->SetWorldPos(block[x][y][z]->pos);
+					voxel[(int)_Dir::Left][x][y][z]->MoveWorldPos(Vector3(-0.5f, 0.5f, 0));
+					voxel[(int)_Dir::Left][x][y][z]->rotation = Vector3(-90, 90, 0) * TORADIAN;
+					voxel[(int)_Dir::Left][x][y][z]->Update();
+					arr.push_back(voxel[(int)_Dir::Left][x][y][z]);
+				}
+				// 오른쪽면 렌더링
+				if (x == Size_X - 1 || block[x + 1][y][z]->type == _BlockType::AIR)
+				{
+					block[x][y][z]->isCheck[(int)_Dir::Right] = true;
+					voxel[(int)_Dir::Right][x][y][z] = Actor::Create();
+					voxel[(int)_Dir::Right][x][y][z]->LoadFile(file);
+					voxel[(int)_Dir::Right][x][y][z]->SetWorldPos(block[x][y][z]->pos);
+					voxel[(int)_Dir::Right][x][y][z]->MoveWorldPos(Vector3(+0.5f, 0.5f, 0));
+					voxel[(int)_Dir::Right][x][y][z]->rotation = Vector3(90, 90, 0) * TORADIAN;
+					voxel[(int)_Dir::Right][x][y][z]->Update();
+					arr.push_back(voxel[(int)_Dir::Right][x][y][z]);
+				}
+			}
+		}
+	}
 }
 
 void Chunk::Render()
 {
 	for (int i = 0; i < arr.size(); i++)
 	{
-		arr[i].Render();
+		arr[i]->Render();
 	}
 }

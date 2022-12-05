@@ -3,19 +3,33 @@
   Main.cpp
   Player.cpp
   Scene_Main.cpp
-D:\Github\Dx113D-Minecraft\D3D\Game2\Chunk.cpp(26,55): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\Github\Dx113D-Minecraft\D3D\Game2\Chunk.cpp(26,51): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\Github\Dx113D-Minecraft\D3D\Game2\Chunk.cpp(26,48): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\Github\Dx113D-Minecraft\D3D\Game2\Chunk.cpp(143,28): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\Github\Dx113D-Minecraft\D3D\Game2\Chunk.cpp(145,28): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\Github\Dx113D-Minecraft\D3D\Game2\Chunk.cpp(156,27): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\Github\Dx113D-Minecraft\D3D\Game2\Chunk.cpp(158,27): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\Github\Dx113D-Minecraft\D3D\Game2\Chunk.cpp(180,28): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\Github\Dx113D-Minecraft\D3D\Game2\Chunk.cpp(182,28): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\Github\Dx113D-Minecraft\D3D\Game2\Chunk.cpp(194,27): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\Github\Dx113D-Minecraft\D3D\Game2\Chunk.cpp(196,27): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\Github\Dx113D-Minecraft\D3D\Game2\Chunk.cpp(238,19): warning C4267: 'return': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\Github\Dx113D-Minecraft\D3D\Game2\Scene_Main.cpp(23,43): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\Github\Dx113D-Minecraft\D3D\Game2\Scene_Main.cpp(23,37): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\Dx113D-Minecraft\D3D\Game2\Chunk.cpp(27,72): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\Dx113D-Minecraft\D3D\Game2\Chunk.cpp(27,54): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\Dx113D-Minecraft\D3D\Game2\Chunk.cpp(27,49): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\Dx113D-Minecraft\D3D\Game2\Chunk.cpp(70,19): warning C4267: 'return': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\Dx113D-Minecraft\D3D\Game2\Chunk.cpp(97,28): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\Dx113D-Minecraft\D3D\Game2\Chunk.cpp(99,28): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\Dx113D-Minecraft\D3D\Game2\Chunk.cpp(111,27): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\Dx113D-Minecraft\D3D\Game2\Chunk.cpp(113,27): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\Dx113D-Minecraft\D3D\Game2\Chunk.cpp(137,28): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\Dx113D-Minecraft\D3D\Game2\Chunk.cpp(139,28): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\Dx113D-Minecraft\D3D\Game2\Chunk.cpp(150,27): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\Dx113D-Minecraft\D3D\Game2\Chunk.cpp(152,27): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\Dx113D-Minecraft\D3D\Game2\Chunk.cpp(176,28): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\Dx113D-Minecraft\D3D\Game2\Chunk.cpp(178,28): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\Dx113D-Minecraft\D3D\Game2\Chunk.cpp(190,31): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\Dx113D-Minecraft\D3D\Game2\Chunk.cpp(192,31): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\Dx113D-Minecraft\D3D\Game2\Chunk.cpp(216,28): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\Dx113D-Minecraft\D3D\Game2\Chunk.cpp(218,28): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\Dx113D-Minecraft\D3D\Game2\Chunk.cpp(230,31): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\Dx113D-Minecraft\D3D\Game2\Chunk.cpp(232,31): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\Dx113D-Minecraft\D3D\Game2\Chunk.cpp(256,28): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\Dx113D-Minecraft\D3D\Game2\Chunk.cpp(258,28): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\Dx113D-Minecraft\D3D\Game2\Chunk.cpp(270,31): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\Dx113D-Minecraft\D3D\Game2\Chunk.cpp(272,31): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\Dx113D-Minecraft\D3D\Game2\Chunk.cpp(296,28): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\Dx113D-Minecraft\D3D\Game2\Chunk.cpp(298,28): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\Dx113D-Minecraft\D3D\Game2\Chunk.cpp(310,31): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Github\Dx113D-Minecraft\D3D\Game2\Chunk.cpp(312,31): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
      D:\Github\Dx113D-Minecraft\D3D\\Build\Game2.lib 라이브러리 및 D:\Github\Dx113D-Minecraft\D3D\\Build\Game2.exp 개체를 생성하고 있습니다.
   Game2.vcxproj -> D:\Github\Dx113D-Minecraft\D3D\Build\Game2.exe

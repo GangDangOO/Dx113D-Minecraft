@@ -1,13 +1,15 @@
 #pragma once
-#define SIZE_X 3
-#define SIZE_Z 3
-
+#define Chunk_X 20
+#define Chunk_Z 20
 class Scene_Main : public Scene
 {
 private:
 	Camera* cam;
 
-	Chunk* chunk[SIZE_X][SIZE_Z];
+	Chunk*	chunk[Chunk_X][Chunk_Z];
+	Vector3 pos[Chunk_X][Chunk_Z];
+	vector<Chunk*> arr;
+	int x, z;
 public:
 	Scene_Main();
 	~Scene_Main();

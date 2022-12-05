@@ -33,8 +33,8 @@ float4 PS(PixelInput input) : SV_TARGET
     
     float4 BaseColor = DiffuseMapping(input.Uv);
     
-    float3 Normal = normalize(input.Normal);
-    
+    // float3 Normal = normalize(input.Normal);
+    float3 Normal = float3(0,0,0);
     BaseColor = Lighting(BaseColor, input.Uv, Normal, input.wPosition);
     
     return BaseColor;

@@ -1,0 +1,11 @@
+<Root Name="Block" Visible="true" ObType="1">
+    <Mesh File="0.Voxel.mesh"/>
+    <Shader File="3.Cube.hlsl"/>
+    <Material File="Grass_Side.mtl"/>
+    <Transform>
+        <Position X="0" Y="0" Z="0"/>
+        <Scale X="1" Y="1" Z="1"/>
+        <Rotation X="0" Y="0" Z="0"/>
+    </Transform>
+    <Children Size="0"/>
+</Root>
