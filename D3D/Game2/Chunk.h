@@ -10,12 +10,14 @@ private:
 	vector<Actor*> arr;
 public:
 	Vector3	position;
-	Chunk(int posX, int posZ);
+
+	Chunk(int posX, int posZ, PerlinNoise* pn);
 	~Chunk();
 	void	RenderHierarchy();
 	void	SetRendering();
 	void	SetGreedyMeshing();
 	int		SetArray();
+	int		GetChunkSize();
 	void	Update();
 	void	Render();
 };

@@ -15,6 +15,9 @@
     <ClInclude Include="Player.h">
       <Filter>Player</Filter>
     </ClInclude>
+    <ClInclude Include="PerlinNoise.h">
+      <Filter>System</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
@@ -29,6 +32,9 @@
     </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>Player</Filter>
+    </ClCompile>
+    <ClCompile Include="PerlinNoise.cpp">
+      <Filter>System</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -23,6 +23,7 @@ public:
 	_BlockType	type;
 	bool		isCheck[6];
 	Vector3		pos;
+
 	Block(_BlockType _type);
 	~Block();
 };
