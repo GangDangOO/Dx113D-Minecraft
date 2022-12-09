@@ -1,14 +1,14 @@
 #pragma once
-#define Chunk_X 64
-#define Chunk_Z 64
 class Scene_Main : public Scene
 {
 private:
-	PerlinNoise* pn;
 	Camera* cam;
+
+	CreateWorld*	world;
 
 	Chunk*	chunk[Chunk_X][Chunk_Z];
 	Vector3 pos[Chunk_X][Chunk_Z];
+	Int2	curLocation;
 	vector<Chunk*> arr;
 public:
 	Scene_Main();

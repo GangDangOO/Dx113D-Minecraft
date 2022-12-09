@@ -1,7 +1,5 @@
 #pragma once
-#define Size_X 16
-#define Size_Y 16
-#define Size_Z 16
+
 class Chunk
 {
 private:
@@ -11,8 +9,9 @@ private:
 public:
 	Vector3	position;
 
-	Chunk(int posX, int posZ, PerlinNoise* pn);
+	Chunk(int posX, int posZ, int height[Size_X * Size_Z]);
 	~Chunk();
+	
 	void	RenderHierarchy();
 	void	SetRendering();
 	void	SetGreedyMeshing();

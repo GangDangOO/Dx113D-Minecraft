@@ -15,7 +15,10 @@
     <ClInclude Include="Player.h">
       <Filter>Player</Filter>
     </ClInclude>
-    <ClInclude Include="PerlinNoise.h">
+    <ClInclude Include="CreateWorld.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenSimplexNoise.h">
       <Filter>System</Filter>
     </ClInclude>
   </ItemGroup>
@@ -33,7 +36,10 @@
     <ClCompile Include="Player.cpp">
       <Filter>Player</Filter>
     </ClCompile>
-    <ClCompile Include="PerlinNoise.cpp">
+    <ClCompile Include="CreateWorld.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenSimplexNoise.cpp">
       <Filter>System</Filter>
     </ClCompile>
   </ItemGroup>
@@ -50,5 +56,8 @@
     <Filter Include="Player">
       <UniqueIdentifier>{4c7b9121-d870-4227-bd58-e7553fc6f15d}</UniqueIdentifier>
     </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="cpp.hint" />
   </ItemGroup>
 </Project>

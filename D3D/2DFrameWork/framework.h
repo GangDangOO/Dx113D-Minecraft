@@ -7,6 +7,8 @@
 #include <assert.h>
 
 //C++
+#include <numeric>
+#include <cmath>
 #include <string>
 #include <vector>
 #include <deque>
