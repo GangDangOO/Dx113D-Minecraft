@@ -15,6 +15,8 @@ Input::Input()
     wheelMoveValue = Vector3(0.0f, 0.0f, 0.0f);
     DWORD tLine = 0;
     SystemParametersInfo(SPI_GETWHEELSCROLLLINES, 0, &tLine, 0);
+
+    isCamRot = true;
 }
 
 Input::~Input()
@@ -108,10 +110,25 @@ void Input::Update()
     wheelMoveValue = wheelStatus - wheelOldStatus;
     wheelOldStatus.z = wheelStatus.z;
 
-    currentPostion = position;
+    //현재 마우스 좌표 (창)
+    POINT current;
+    GetCursorPos(&current);
+    currentPostion = Vector3(current.x, current.y, 0.0f);
+
     movePosition = currentPostion - oldPostion;
 
-    oldPostion = currentPostion;
+    if (INPUT->KeyDown('E')) isCamRot = !isCamRot;
+
+    //화면 중앙으로
+    if (isCamRot)
+    {
+        POINT center;
+        center.x = App.GetHalfWidth();
+        center.y = App.GetHalfHeight();
+        ClientToScreen(App.handle, &center);
+        SetCursorPos(center.x, center.y);
+        oldPostion = Vector3(center.x, center.y, 0.0f);
+    }
 
     //0~ 800  ->   0 ~ 2  -> -1 ~ 1
     NDCPosition.x = position.x / App.GetHalfWidth() - 1.0f;

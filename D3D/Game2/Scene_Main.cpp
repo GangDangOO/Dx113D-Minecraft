@@ -11,11 +11,9 @@ Scene_Main::~Scene_Main()
 
 void Scene_Main::Init()
 {
+	player = new Player();
 	world = new CreateWorld();
 
-	cam = Camera::Create();
-	cam->LoadFile("cam.xml");
-	Camera::main = cam;
 	for (int i = 0; i < Chunk_X; i++)
 	{
 		for (int j = 0; j < Chunk_Z; j++)
@@ -30,9 +28,11 @@ void Scene_Main::Init()
 			chunk[i][j] = new Chunk(i, j, world->GetType(i, j));
 		}
 	}
-	cam->SetWorldPos(chunk[Chunk_X / 2][Chunk_Z / 2]->position);
-	cam->MoveWorldPos(Vector3(0, 2.0f, 0));
+	Vector3 playerPos = chunk[Chunk_X / 2][Chunk_Z / 2]->position;
+	playerPos.y += 2.0f;
+	player->SetWorldPos(playerPos);
 	curLocation = Int2(Chunk_X / 2, Chunk_Z / 2);
+	player->SetLiveChunk(chunk[curLocation.x][curLocation.y]->GetArr());
 }
 
 void Scene_Main::Release()
@@ -52,26 +52,31 @@ void Scene_Main::Update()
 	Camera::ControlMainCam();
 
 	ImGui::Begin("Hierarchy");
-	cam->RenderHierarchy();
+	player->RenderHierarchy();
 	/*for (int i = 0; i < arr.size(); i++)
 	{
 		arr[i]->RenderHierarchy();
 	}*/
 	ImGui::End();
 
-	cam->Update();
+	player->Update();
 }
 
 void Scene_Main::LateUpdate()
 {
 	Vector3 dir;
+	float	temp = 100.0f;
+	Int2	playerChunk;
 	for (int i = curLocation.x - 3; i < curLocation.x + 3; i++)
 	{
 		for (int j = curLocation.y - 3; j < curLocation.y + 3; j++)
 		{
-			float length = dir.Distance(Vector3(pos[i][j].x, 0, pos[i][j].z), Vector3(cam->GetWorldPos().x, 0, cam->GetWorldPos().z));
-			if (length < 10)
-				curLocation = Int2(i, j);
+			float length = dir.Distance(Vector3(pos[i][j].x, 0, pos[i][j].z), Vector3(Camera::main->GetWorldPos().x, 0, Camera::main->GetWorldPos().z));
+			if (length < temp)
+			{
+				temp = length;
+				playerChunk = Int2(i, j);
+			}
 			if (length < 30)
 			{
 				if (find(arr.begin(), arr.end(), chunk[i][j]) == arr.end())
@@ -91,6 +96,12 @@ void Scene_Main::LateUpdate()
 			}
 		}
 	}
+	if (curLocation != playerChunk)
+	{
+		curLocation = playerChunk;
+		player->SetLiveChunk(chunk[curLocation.x][curLocation.y]->GetArr());
+	}
+	player->LateUpdate();
 }
 
 void Scene_Main::PreRender()
@@ -101,7 +112,7 @@ void Scene_Main::PreRender()
 void Scene_Main::Render()
 {
 	LIGHT->Set();
-	cam->Set();
+	player->Render();
 	for (int i = 0; i < arr.size(); i++)
 	{
 		arr[i]->Render();

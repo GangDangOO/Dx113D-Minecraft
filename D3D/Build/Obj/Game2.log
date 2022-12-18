@@ -1,3 +1,6 @@
-﻿  CreateWorld.cpp
+﻿  Player.cpp
+D:\Github\Dx113D-Minecraft\D3D\Game2\Player.cpp(49,10): warning C4101: 'dis' :참조되지 않은 지역 변수입니다.
+D:\Github\Dx113D-Minecraft\D3D\Game2\Player.cpp(137,39): warning C4305: '인수': 'double'에서 'float'(으)로 잘립니다.
+D:\Github\Dx113D-Minecraft\D3D\Game2\Player.cpp(101,9): warning C4101: 'dis' :참조되지 않은 지역 변수입니다.
      D:\Github\Dx113D-Minecraft\D3D\\Build\Game2.lib 라이브러리 및 D:\Github\Dx113D-Minecraft\D3D\\Build\Game2.exp 개체를 생성하고 있습니다.
   Game2.vcxproj -> D:\Github\Dx113D-Minecraft\D3D\Build\Game2.exe

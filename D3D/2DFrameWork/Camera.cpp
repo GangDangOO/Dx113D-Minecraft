@@ -245,42 +245,42 @@ void Camera::ControlMainCam(float scalar)
 {
     if (not main) return;
 
-	if (INPUT->KeyPress('W'))
-	{
-		//                                  초당100움직임 xyz/s
-		main->MoveWorldPos(main->GetForward() * DELTA * scalar);
-	}
-	if (INPUT->KeyPress('S'))
-	{
-		main->MoveWorldPos(-main->GetForward() * DELTA * scalar);
-	}
-	if (INPUT->KeyPress('A'))
-	{
-		main->MoveWorldPos(-main->GetRight() * DELTA * scalar);
-	}
-	if (INPUT->KeyPress('D'))
-	{
-		main->MoveWorldPos(main->GetRight() * DELTA * scalar);
-	}
-	if (INPUT->KeyPress('Q'))
-	{
-		main->MoveWorldPos(-main->GetUp() * DELTA * scalar);
-	}
-	if (INPUT->KeyPress('E'))
-	{
-		main->MoveWorldPos(main->GetUp() * DELTA * scalar);
-	}
+	//if (INPUT->KeyPress('W'))
+	//{
+	//	//                                  초당100움직임 xyz/s
+	//	main->MoveWorldPos(main->GetForward() * DELTA * scalar);
+	//}
+	//if (INPUT->KeyPress('S'))
+	//{
+	//	main->MoveWorldPos(-main->GetForward() * DELTA * scalar);
+	//}
+	//if (INPUT->KeyPress('A'))
+	//{
+	//	main->MoveWorldPos(-main->GetRight() * DELTA * scalar);
+	//}
+	//if (INPUT->KeyPress('D'))
+	//{
+	//	main->MoveWorldPos(main->GetRight() * DELTA * scalar);
+	//}
+	//if (INPUT->KeyPress('Q'))
+	//{
+	//	main->MoveWorldPos(-main->GetUp() * DELTA * scalar);
+	//}
+	//if (INPUT->KeyPress('E'))
+	//{
+	//	main->MoveWorldPos(main->GetUp() * DELTA * scalar);
+	//}
 
 	//마우스 우클릭시
-	if (INPUT->KeyPress(VK_RBUTTON))
+	/*if (INPUT->KeyPress(VK_RBUTTON))
 	{
 		Vector3 Rot;
 		Rot.x = INPUT->movePosition.y * 0.001f;
 		Rot.y = INPUT->movePosition.x * 0.001f;
 		main->rotation += Rot;
-	}
+	}*/
 	//휠키로 카메라 앞뒤조절
-	main->MoveWorldPos(main->GetForward() * INPUT->wheelMoveValue.z * DELTA);
+	// main->MoveWorldPos(main->GetForward() * INPUT->wheelMoveValue.z * DELTA);
 }
 
 bool Camera::Intersect(Vector3 coord)

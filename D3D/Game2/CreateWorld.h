@@ -9,5 +9,4 @@ private:
 public:
 	CreateWorld();
 	int*	GetType(int ChunkX, int ChunkZ);
-	void	CallAutomata(int n);
 };

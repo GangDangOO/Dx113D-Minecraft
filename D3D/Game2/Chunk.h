@@ -17,6 +17,7 @@ public:
 	void	SetGreedyMeshing();
 	int		SetArray();
 	int		GetChunkSize();
+	vector<Actor*>	GetArr();
 	void	Update();
 	void	Render();
 };

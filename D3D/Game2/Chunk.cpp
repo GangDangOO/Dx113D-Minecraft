@@ -88,6 +88,11 @@ int Chunk::GetChunkSize()
 	return arr.size();
 }
 
+vector<Actor*> Chunk::GetArr()
+{
+	return arr;
+}
+
 void Chunk::SetGreedyMeshing()
 {
 	for (int x = 0; x < Size_X; x++)
@@ -145,7 +150,7 @@ void Chunk::SetGreedyMeshing()
 								{
 									VertexPT* vertex = (VertexPT*)voxel[(int)_Dir::Top][x][y][z]->mesh->vertices;
 									vertex[2].position.x = t - x + 0.5f;
-									vertex[2].uv.x = t - x + 1;
+									vertex[2].uv.x = t - x + 1;	 
 									vertex[3].position.x = t - x + 0.5f;
 									vertex[3].uv.x = t - x + 1;
 									voxel[(int)_Dir::Top][x][y][z]->mesh->UpdateMesh();

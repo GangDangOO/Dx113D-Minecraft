@@ -2,8 +2,7 @@
 class Scene_Main : public Scene
 {
 private:
-	Camera* cam;
-
+	Player*			player;
 	CreateWorld*	world;
 
 	Chunk*	chunk[Chunk_X][Chunk_Z];

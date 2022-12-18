@@ -26,7 +26,10 @@ public:
     Vector3 NDCPosition;
     Vector3 movePosition;   //마우스 이동벡터
     Vector3 wheelMoveValue;
+
+    bool    isCamRot;
 public:
+
     Input();
     ~Input();
 

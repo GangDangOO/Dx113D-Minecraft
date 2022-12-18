@@ -6,23 +6,25 @@ CreateWorld::CreateWorld()
 {
 	unsigned int seed = 2100;
 	Noise n = Noise(seed);
-	for (int x = 0; x < Size_X * Chunk_X; x++)
+	float frequency = 2.0f;
+	long sizeX = Size_X * Chunk_X;
+	long sizeZ = Size_Z * Chunk_Z;
+	for (int x = 0; x < sizeX; x++)
 	{
-		for (int y = 0; y < Size_Z * Chunk_Z; y++)
+		double nx = (x * sizeX * 0.1) / sizeX * 0.1;
+		for (int y = 0; y < sizeZ; y++)
 		{
-			double h = n.eval(x, y);
-			// cout<< h << endl;
-			if (h > 0.5f)
-				height[x][y] = 3;
-			else if(h > 0.0f)
-				height[x][y] = 2;
-			else if (h > -0.5f)
-				height[x][y] = 1;
-			else
-				height[x][y] = 0;
+			double ny = (y * sizeZ * 0.1) / sizeZ * 0.1 + 1.0;
+			double e = 1 * n.eval(1 * frequency * nx, 1 * frequency * ny)
+				+ 0.5 * n.eval(2 * frequency * nx, 2 * frequency * ny)
+				+ 0.25 * n.eval(4 * frequency * nx, 4 * frequency * ny);
+			double h = e / (1 + 0.5 + 0.25);
+			h = round(h * 7) / 7 + 1;
+			h /= 0.2;
+			// cout << h << endl;
+			height[x][y] = (int)h;
 		}
 	}
-	// CallAutomata(3);
 }
 
 int* CreateWorld::GetType(int ChunkX, int ChunkZ)
@@ -35,22 +37,4 @@ int* CreateWorld::GetType(int ChunkX, int ChunkZ)
 		}
 	}
 	return chunk;
-}
-
-void CreateWorld::CallAutomata(int n)
-{
-	for (int i = 0; i < n; i++)
-	{
-		for (int x = 1; x < Size_X * Chunk_X - 1; x++)
-		{
-			for (int y = 1; y < Size_Z * Chunk_Z - 1; y++)
-			{
-				if (RANDOM->Int(0, 3) == 0) height[x - 1][y]++;
-				if (RANDOM->Int(0, 3) == 0) height[x + 1][y]++;
-				if (RANDOM->Int(0, 3) == 0) height[x][y - 1]++;
-				if (RANDOM->Int(0, 3) == 0) height[x][y + 1]++;
-				if (RANDOM->Int(0, 5) == 0) height[x][y]++;
-			}
-		}
-	}
 }
